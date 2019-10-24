@@ -1,0 +1,161 @@
+<html>
+
+<head>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'></link>
+<style>
+
+body {
+  overflow: hidden;
+  display: block;
+
+  position: absolute;
+  background-color:rgba(55,55,55, 0.5);
+}
+
+.dropdown-container {
+  position: absolute;
+  width: 120px;
+  height: 30px;   
+
+  background-color:rgba(52, 174, 235, 1.0);   
+  border: 1px solid rgba(55, 138, 179, 1.0);
+}
+
+.dropdown-container:hover {
+  background-color:rgba(54, 163, 217, 1.0);  
+}
+
+.dropdown-text {
+  position: absolute;
+  width: 100%;
+  height: 80%; 
+
+  padding: 1% 0%;
+
+  color: white;
+  font-size: 22px;
+  text-align: center;
+  font-family: Roboto;
+  text-shadow: 2px 2px rgba(55, 138, 179, 1.0); 
+}
+
+.dropdown-element-container {
+  display: none;
+  position: relative;
+  top: 100%;
+  width: 100%; 
+  left: -1px;
+  max-height: 200px;
+  border: 1px solid rgba(185,185,185,0.8);
+  overflow: auto;
+}
+
+.dropdown-element {
+  position: relative;
+  top: 100%;
+  width: 100%;
+  height: 80%;   
+  background-color:rgba(210,210,210,1.0);
+}
+
+.dropdown-element:hover {
+  background-color:rgba(205,205,205, 0.5);  
+}
+
+.dropdown-element-text {
+  position: absolute;
+  width: 100%;
+  height: 80%; 
+  padding: 3% 0%;
+
+  color: black;
+  font-size: 14px;
+  text-align: center;
+  font-family: Roboto;  
+  text-shadow: 2px 2px #000000 2px 2px #000000; 
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(210,210,210,1.0); 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: rgba(185,185,185,1.0); 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200,200,200,1.0); 
+}
+
+</style>
+
+</head>
+
+<body>
+
+<script>
+
+function DropDown(e) {
+  if (e.childNodes[1].style.display == "block") {
+    e.childNodes[1].style.display = "none";
+  }
+  else {
+    e.childNodes[1].style.display = "block";
+  }
+}
+
+function ClickEle(e) {
+  console.log(e.textContent);
+}
+
+function CreateDropdown() {
+  var container = document.createElement('DIV');
+  container.className = "dropdown-container";
+  container.onclick = function() { DropDown(this); }
+
+  document.body.appendChild(container);
+
+  var dropText = document.createElement('TEXT');
+  dropText.className = "dropdown-text noselect";
+  dropText.textContent = "Droptab"
+  container.appendChild(dropText);
+
+  var dropCont = document.createElement('DIV');
+  dropCont.className = "dropdown-element-container";
+  container.appendChild(dropCont);
+
+  for (var i = 0;i<10;i++) {
+    var dropEle = document.createElement('DIV');
+    dropEle.className = "dropdown-element";
+    dropEle.onclick = function() { ClickEle(this); }
+    dropCont.appendChild(dropEle);
+
+    var eleText = document.createElement('TEXT');
+    eleText.className = "dropdown-element-text noselect";
+    eleText.textContent = i;   
+    dropEle.appendChild(eleText); 
+  }
+
+  dropCont.style.display = "none";
+} 
+
+CreateDropdown()
+
+</script>
+
+</body>
+
+</html>
